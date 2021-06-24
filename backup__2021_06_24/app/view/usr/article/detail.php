@@ -1,16 +1,9 @@
 <?php
-$meta = [];
-$updateDateBits = explode(" ", $article['updateDate']);
-$meta['pageGenDate'] = $updateDateBits[0] . 'T' . $updateDateBits[1] . 'Z';
-$meta['siteSubject'] = str_replace('"', '＂', $article['title']);
-$utterancPageIdentifier = "/usr/article/detail?id={$article['id']}";
-$meta['og:title'] = $utterancPageIdentifier;
-$meta['siteDescription'] = str_replace('"', '＂', mb_substr($article['body'], 0, 100));
-$meta['siteDescription'] = str_replace("\n", "", $meta['siteDescription']);
 $pageTitleIcon = '<i class="fas fa-newspaper"></i>';
 $pageTitle = "게시물 상세내용, ${id}번 게시물";
 
-$body = ToastUiEditor__getSafeSource($article['body']);
+$body = str_replace('<script', '<t-script>', $article['body']);
+$body = str_replace('</script>', '</t-script>', $article['body']);
 ?>
 <?php require_once __DIR__ . "/../head.php"; ?>
 <?php require_once __DIR__ . "/../../part/toastUiSetup.php"; ?>
@@ -40,18 +33,21 @@ $body = ToastUiEditor__getSafeSource($article['body']);
   <div class="container mx-auto">
     <div class="con-pad">
       <div id="disqus_thread"></div>
-      
-      <style>
-      .utterances {
-        max-width: 100%;
-      }
-      </style>
-      <script src="https://utteranc.es/client.js"
-        repo="bgchoi205/php_blog_comment"
-        issue-term="og:title"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
+      <?php
+      $disqusConfigPageIdentifier = "/usr/article/detail?id={$article['id']}";
+      $disqusConfigPageUrl = "https://{$prodSiteDomain}{$disqusConfigPageIdentifier}";
+      ?>
+      <script>
+        var disqus_config = function () {
+          this.page.url = '<?=$disqusConfigPageUrl?>';
+          this.page.identifier = '<?=$disqusConfigPageIdentifier?>';
+        };
+        (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://b-dola2-com.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+        })();
       </script>
     </div>
   </div>

@@ -33,17 +33,12 @@ $loginedMember = $_REQUEST['App__loginedMember'];
 
     <?php if ($envCode == 'prod') { ?>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-94LNZ8CK0K"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DL3EPB6BMB"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-
+            function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-
-            gtag('config', 'G-94LNZ8CK0K');
+            gtag('config', 'G-DL3EPB6BMB');
         </script>
     <?php } ?>
 
@@ -56,7 +51,7 @@ $loginedMember = $_REQUEST['App__loginedMember'];
         <div class="container mx-auto h-full flex">
             <a href="/" class="top-bar__logo px-5 flex items-center">
                 <span><i class="fas fa-lemon"></i></span>
-                <span class="ml-2 font-bold hidden sm:inline">LEMON BLOG</span>
+                <span class="ml-2 font-bold hidden sm:inline">CBG BLOG</span>
             </a>
 
             <div class="flex-grow"></div>
